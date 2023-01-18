@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "mapa-geolocalizacao",
-    "slug": "mapa-geolocalizacao",
+    "name": "app-mapa-geolocalizacao",
+    "slug": "app-mapa-geolocalizacao",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
