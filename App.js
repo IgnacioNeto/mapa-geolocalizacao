@@ -4,30 +4,29 @@ import MapView, { Marker } from "react-native-maps";
 
 export default function App() {
   const regiaoInicial = {
-    latitude: 37.401437,
-    longitude: -116.86773,
+    // SP
+    latitude: -23.533773,
+    longitude: -46.65529,
 
-    latitudeDelta: 0.0222,
-    longitudeDelta: 0.00121,
+    latitudeDelta: 50,
+    longitudeDelta: 50,
   };
-  const [localizacao, setLocalizacao] = useState({
-    latitude: 37.401437,
-    longitude: -116.86773,
-    latitudeDelta: 0.0222,
-    longitudeDelta: 0.00121,
-  });
-  const novaLocalizacao = (event) => {
-    let coordenadas = {
+
+  const marcarLocal = (event) => {
+    setLocalizacao({
+      ...localizacao,
       latitude: event.nativeEvent.coordinate.latitude,
       longitude: event.nativeEvent.coordinate.longitude,
-    };
-    setLocalizacao({
-      ...coordenadas,
-      latitudeDelta: 0.0222,
-      longitudeDelta: 0.00121,
     });
     console.log(localizacao);
   };
+  const [localizacao, setLocalizacao] = useState({
+    // Argentina
+    latitude: -33.867886,
+    longitude: -63.987,
+    latitudeDelta: 10,
+    longitudeDelta: 10,
+  });
 
   return (
     <>
@@ -37,14 +36,13 @@ export default function App() {
           style={estilos.map}
           initialRegion={regiaoInicial}
           liteMode={false}
-          mapType="satellite"
-          onPress={novaLocalizacao}
+          mapType="standard"
+          onPress={marcarLocal}
         >
           <Marker
             coordinate={localizacao}
-            title="Titulo"
-            draggable
-            onPress={localizacao}
+            title="Aqui!!"
+            onPress={(e) => console.log(e.nativeEvent)}
           />
         </MapView>
       </View>
