@@ -8,25 +8,20 @@ export default function App() {
     latitude: -23.533773,
     longitude: -46.65529,
 
-    latitudeDelta: 50,
-    longitudeDelta: 50,
+    latitudeDelta: 30,
+    longitudeDelta: 30,
   };
 
   const marcarLocal = (event) => {
     setLocalizacao({
-      ...localizacao,
+      latitudeDelta: 0.3,
+      longitudeDelta: 0.3,
       latitude: event.nativeEvent.coordinate.latitude,
       longitude: event.nativeEvent.coordinate.longitude,
     });
     console.log(localizacao);
   };
-  const [localizacao, setLocalizacao] = useState({
-    // Argentina
-    latitude: -33.867886,
-    longitude: -63.987,
-    latitudeDelta: 10,
-    longitudeDelta: 10,
-  });
+  const [localizacao, setLocalizacao] = useState();
 
   return (
     <>
@@ -34,16 +29,21 @@ export default function App() {
       <View style={estilos.container}>
         <MapView
           style={estilos.map}
-          initialRegion={regiaoInicial}
+          // initialRegion={regiaoInicial}
+          // Coalescencia (Se existir localizacao mostrar localizacao, senão região inicial)
+          region={localizacao ?? regiaoInicial}
           liteMode={false}
           mapType="standard"
           onPress={marcarLocal}
         >
-          <Marker
-            coordinate={localizacao}
-            title="Aqui!!"
-            onPress={(e) => console.log(e.nativeEvent)}
-          />
+          {/* Condicional SE houver localização inicial  mostre o marcador, senão não */}
+          {localizacao && (
+            <Marker
+              coordinate={localizacao}
+              title="Aqui!!"
+              onPress={(e) => console.log(e.nativeEvent)}
+            />
+          )}
         </MapView>
       </View>
     </>
